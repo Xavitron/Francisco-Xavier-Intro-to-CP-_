@@ -1,28 +1,20 @@
 #Sources
 ''' https://stackoverflow.com/questions/45093430/tron-game-collision-turtle-python
     https://stackoverflow.com/a/9997374/5771269
-    myNineth,py  
+    myNineth.py
 '''
 import turtle
 from turtle import Turtle, Screen
-from turtle import *
-from random import randint 
 
 mypen = Turtle()
-player = Turtle()
-constantSpeed = player.speed(15)
 screen = Screen()
-#screen = turtle.Screen()
+##Changes background color to black
+#screen.bgcolor('black')
+#Changes the default background, and puts the image that I asked it to put
 bgTurtle = Turtle()
 screenTurtle = bgTurtle.getscreen()
-screenTurtle.bgpic("background.gif")
-    
-    
-#Changes background color to black
-#screen.setup(1600,1000)
-#screen.bgcolor("black")
-#screen.bgpic("background.gif")
-#screen.bgpic("C:/Users/X.MendiburuPerez20/OneDrive - Bellarmine College Preparatory/Intro_to_CP/Mendiburu_Xavi/Final Project/background.jpg")
+screenTurtle.bgpic = ("background.gif")
+
 
 #Draw border of the game 
 mypen.penup()
@@ -55,7 +47,6 @@ mypen.forward(300)
 screen.title("Python Turtle game with classes...")
 dead = False
 
-#It tells the turtle that when the user tells them to move up, the player or the enemy will move up depending on the key that is pressed
 def up(who):
     global previousMove
 
@@ -66,12 +57,11 @@ def up(who):
         path.append(turtle.position())
     previousMove = 'up'
 
-    turtle.fd(15)
+    turtle.fd(40)
 #here it checks if the you have collided before making the next move
     if checkCollision(turtle.position(), path, players[1 - who][PATH]):
         collision(turtle)
 
-#It tells the turtle that when the user tells them to move to the right, the player or the enemy will move to the right depending on the key that is pressed
 def right(who):
     global previousMove
 
@@ -82,12 +72,11 @@ def right(who):
         path.append(turtle.position())
     previousMove = 'right'
 
-    turtle.fd(15)
+    turtle.fd(40)
 #here it checks if the you have collided before making the next move
     if checkCollision(turtle.position(), path, players[1 - who][PATH]):
         collision(turtle)
 
-#It tells the turtle that when the user tells them to move to the left, the player or the enemy will move to the left depending on the key that is pressed
 def left(who):
     global previousMove
 
@@ -98,12 +87,11 @@ def left(who):
         path.append(turtle.position())
     previousMove = 'left'
 
-    turtle.fd(15)
+    turtle.fd(40)
 #here it checks if the you have collided before making the next move
     if checkCollision(turtle.position(), path, players[1 - who][PATH]):
         collision(turtle)
 
-#It tells the turtle that when the user tells them to move down, the player or the enemy will move down depending on the key that is pressed
 def down(who):
     global previousMove
 
@@ -114,12 +102,11 @@ def down(who):
         path.append(turtle.position())
     previousMove = 'down'
 
-    turtle.fd(15)
+    turtle.fd(40)
 #here it checks if the you have collided before making the next move
     if checkCollision(turtle.position(), path, players[1 - who][PATH]):
         collision(turtle)
 
-#This makes the turtles stop when one turtle crosses the others line 
 def collision(turtle):
     for key in ('Up', 'Left', 'Right', 'Down', 'w', 'a', 'd', 's'):
         screen.onkey(None, key)  # disable game
@@ -155,20 +142,17 @@ def intersect(A, B, C, D):
     """ Return true if line segments AB and CD intersect """
     return ccw(A, C, D) != ccw(B, C, D) and ccw(A, B, C) != ccw(A, B, D)
 
-#Here youre creating a player 
-player = Turtle('circle')
-player.speed(1)
-player.shapesize(6 / 20)
+player = Turtle('arrow')
+player.shapesize(10 / 20)
 player.color('red')
 player.pensize(6)
 player.speed('fastest')
 player.penup()
 player.setposition(100, 100)
 player.pendown()
-#Here you create an enemy 
-enemy = Turtle('circle')
-player.speed(1)
-enemy.shapesize(6 / 20)
+
+enemy = Turtle('arrow')
+enemy.shapesize(10 / 20)
 enemy.color('blue')
 enemy.pensize(6)
 enemy.speed('fastest')
@@ -191,24 +175,6 @@ screen.onkey(lambda: up(ENEMY), 'w')
 screen.onkey(lambda: left(ENEMY), 'a')
 screen.onkey(lambda: right(ENEMY), 'd')
 screen.onkey(lambda: down(ENEMY), 's')
-
-#Boundary check for player 
-if player.pos()[0] > 300 or player.pos()[0] < -300:
-    print("Game Over")
-    quit()
-if player.pos()[1] > 300 or player.pos()[1] < -300:
-    print("Game OVer")
-    quit()
-
-#Boundary check for enemy
-if enemy.pos()[0] > 300 or enemy.pos()[0] < -300:
-    print("Game Over")
-    quit()
-if enemy.pos()[1] > 300 or enemy.pos()[1] < -300:
-    print("Game Over")
-    quit()
-
-  
 
 screen.listen()
 

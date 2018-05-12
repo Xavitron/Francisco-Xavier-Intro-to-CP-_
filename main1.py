@@ -109,16 +109,7 @@ class Player2(Turtle):
         self.left(90)
         print("turning left")
     def turnRight(self):
-        global previousMove 
-
-        turtle,path = players[self]
         self.right(90)
-        if previousMove != "rightTurn":
-            path.append(turtle.position())
-            previousMove = "rightTurn"
-        if checkCollision(), path, players[1 - self][PATH]):
-            cullision(turtle)
-
         print("turning right")         
     def move(self):
         self.forward(self.currentSpeed)
